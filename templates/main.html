@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    
+    <title>Iris Plant</title>
+    <link rel = "stylesheet" href = "../static/css/styles.css"
+   
+</head>
+
+<body>
+    <h1>Machine Learning Model on demand!</h1>
+
+    <div class = "content">
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file1">
+            <input type="submit">
+          </form>
+
+   
+    </div>
+
+    
+    <div class = 'content'>
+        {% if pred %}
+            <h3>The result of your prediction is</h3>
+            <h1>{{pred}}</h1>
+        {% endif %}
+
+            {% if pred == 'Setosa' %}
+                <img src = "../static/images/{{pred}}.webp" id = "img">
+            {% elif pred == 'Versicolor' %}
+                <img src = "../static/images/{{pred}}.jpg" id = "img">
+            {% elif pred == 'Virginica' %}
+                <img src = "../static/images/{{pred}}.jpg" id = "img">
+
+            {% endif %}
+    </div>
+  
+</body>
+</html>
