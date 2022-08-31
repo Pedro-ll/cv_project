@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    
+    <title>Iris Plant</title>
+    <link rel = "stylesheet" href = "../static/css/styles.css"
+   
+</head>
+
+<body>
+    <h1>Machine Learning Model on demand!</h1>
+
+    <div class = "content">
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file1">
+            <input type="submit">
+          </form>
+
+          <div> 
+        </div>
+
+   
+    </div>
+
+    
+    <div class = 'content'>
+        {% if pred %}
+            <h3>The result of your prediction is</h3>
+            <h1>{{pred}}</h1>
+            <button type="button" onclick="window.location.href='{{ url_for( 'test' ) }}';">Check the Graph</button>
+        {% endif %}
+ 
+    <!-- D3.js -->
+    </div>
+  
+</body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
+
+    <script type="text/javascript">
+        
+        var graphs = {{graphJSON | safe}};
+        
+        Plotly.plot('chart',graphs,{});  
+        
+        <button type="button">Click Me!</button>
+
+    </script>
+</html>

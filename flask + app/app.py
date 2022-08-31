@@ -1,16 +1,23 @@
 from crypt import methods
+from typing import final
 from flask import Flask, render_template, request, url_for
 import os
 from helper_func import run_main
 import cv2
+import json
+import plotly
 
 UPLOAD_FOLDER = "./upload"
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
+final_result = ''
+graph=""
 
 @app.route('/',methods = ['POST','GET'])
 def iris_pred():
+    global final_result
+    global graph
 
     if request.method == 'POST':
 
@@ -27,15 +34,17 @@ def iris_pred():
         img=cv2.imread("upload/"+file1.filename)
         
 
-        final_result=run_main(img)
+        final_result,graph=run_main(img)
         
-        
-        return render_template('main.html', pred = final_result )
+        return render_template('main.html', pred = final_result)
 
     else:
         return render_template('main.html')
 
+@app.route("/test")
+def test():
+    return render_template('graph.html')
 
 if __name__ == "__main__":
-    app.run(debug = True, port = 8735)
+    app.run(debug = True, port = 8734)
 

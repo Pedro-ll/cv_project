@@ -11,9 +11,11 @@ import os, cv2
 from collections import Counter
 import sys
 import plotly.graph_objects as go
+import plotly
 import pandasql as ps
 import re
-
+import json
+import plotly.express as px
 
 def run_main(img):
 
@@ -302,81 +304,86 @@ def run_main(img):
     solutions=x
 
 
-    # if len(x)==3:
-    #     a=10
-    #     xx= np.arange(round(x[0])-a,round(x[0])+a)
-    #     yy = np.arange(round(x[1])-a,round(x[1])+a)
+    if len(x)==3:
+        a=10
+        xx= np.arange(round(x[0])-a,round(x[0])+a)
+        yy = np.arange(round(x[1])-a,round(x[1])+a)
 
-    #     cmap = plt.get_cmap("tab10")
-    #     make_int = np.vectorize(int)
+        cmap = plt.get_cmap("tab10")
+        make_int = np.vectorize(int)
 
-    #     mycolors_a = make_int(256*np.array(cmap(1)[0:3])).reshape((1, 1,-1)).repeat(21, axis = 0).repeat(21, axis =1)
-    #     mycolors_b = make_int(256*np.array(cmap(2)[0:3])).reshape((1, 1,-1)).repeat(21, axis = 0).repeat(21, axis =1)
-
-
-    #     #plane 1
-
-    #     zz1=[]
-    #     for element in xx:
-    #         zz1.append( (numbers[0]- np.ones(len(yy))*element*coefs[0][0] - yy*coefs[0][1]) / coefs[0][2] )
-
-    #     plane1 = go.Surface(x=xx, y=yy, z=np.array(list(zz1)), surfacecolor = mycolors_a, opacity = .7, showscale = False, name = final_equations[0])
-
-    #     # plane 2
-
-    #     zz2=[]
-    #     for element in xx:
-    #         zz2.append( (numbers[1]- np.ones(len(yy))*element*coefs[1][0] - yy*coefs[1][1]) / coefs[1][2] )
-
-    #     plane2 = go.Surface(x=xx, y=yy, z=np.array(list(zz2)), surfacecolor = mycolors_a, opacity = .7, showscale = False, name = final_equations[1])
+        mycolors_a = make_int(256*np.array(cmap(1)[0:3])).reshape((1, 1,-1)).repeat(21, axis = 0).repeat(21, axis =1)
+        mycolors_b = make_int(256*np.array(cmap(2)[0:3])).reshape((1, 1,-1)).repeat(21, axis = 0).repeat(21, axis =1)
 
 
-    #     # plane 3
+        #plane 1
 
-    #     zz3=[]
-    #     for element in xx:
-    #         zz3.append( (numbers[2]- np.ones(len(yy))*element*coefs[2][0] - yy*coefs[2][1]) / coefs[2][2] )
+        zz1=[]
+        for element in xx:
+            zz1.append( (numbers[0]- np.ones(len(yy))*element*coefs[0][0] - yy*coefs[0][1]) / coefs[0][2] )
 
-    #     plane3 = go.Surface(x=xx, y=yy, z=np.array(list(zz3)), surfacecolor = mycolors_a, opacity = .7, showscale = False, name = final_equations[2])
+        plane1 = go.Surface(x=xx, y=yy, z=np.array(list(zz1)), surfacecolor = mycolors_a, opacity = .7, showscale = False, name = final_equations[0])
 
-    #     figure = go.Figure()
-    #     figure.add_traces([plane1])
-    #     figure.add_traces([plane2])
-    #     figure.add_traces([plane3])
-    #     figure.add_scatter3d(x=[solutions[0]], y=[solutions[1]],z = [solutions[2]], mode='markers',marker={"colorscale":"reds","color":"red","size":10})
+        # plane 2
 
-    #     figure.show()
+        zz2=[]
+        for element in xx:
+            zz2.append( (numbers[1]- np.ones(len(yy))*element*coefs[1][0] - yy*coefs[1][1]) / coefs[1][2] )
 
-
-    # if len(x)==2:
-
-    #     a=10
-    #     xx=np.arange(x[0]-a,x[0]+a)
-    #     yy=(numbers[0]-coefs[0][0]*xx)/coefs[0][1]
-    #     plt.plot(xx,yy)
-
-    #     xx=np.arange(x[1]-a,x[1]+a)
-    #     yy=(numbers[1]-coefs[1][0]*xx)/coefs[1][1]
-    #     plt.plot(xx,yy)
-
-    #     plt.legend(final_equations)
-    #     plt.scatter(x[0],x[1],c="r")
-
-    #     plt.show()
+        plane2 = go.Surface(x=xx, y=yy, z=np.array(list(zz2)), surfacecolor = mycolors_a, opacity = .7, showscale = False, name = final_equations[1])
 
 
-    # if len(x)==1:
+        # plane 3
+
+        zz3=[]
+        for element in xx:
+            zz3.append( (numbers[2]- np.ones(len(yy))*element*coefs[2][0] - yy*coefs[2][1]) / coefs[2][2] )
+
+        plane3 = go.Surface(x=xx, y=yy, z=np.array(list(zz3)), surfacecolor = mycolors_a, opacity = .7, showscale = False, name = final_equations[2])
+
+        figure = go.Figure()
+        figure.add_traces([plane1])
+        figure.add_traces([plane2])
+        figure.add_traces([plane3])
+        figure.add_scatter3d(x=[solutions[0]], y=[solutions[1]],z = [solutions[2]], mode='markers',marker={"colorscale":"reds","color":"red","size":10})
+        figure.write_html("templates/graph.html")
+        graph=plotly.offline.plot(figure,filename="simple-3d-surface",output_type="div")
+
+        #figure.show()
+
+
+    if len(x)==2:
+
+        a=10
+        xx1=np.arange(x[0]-a,x[0]+a)
+        yy1=(numbers[0]-coefs[0][0]*xx1)/coefs[0][1]
+
+        xx2=np.arange(x[1]-a,x[1]+a)
+        yy2=(numbers[1]-coefs[1][0]*xx2)/coefs[1][1]
+
+        fig = go.Figure()
+
+        line1=go.Scatter(x=xx1, y=yy1)
+        line2=go.Scatter(x=xx2, y=yy2)
+        point=go.Scatter(x=np.array(solutions[0]),y=np.array(solutions[1]))
+
+        fig.add_trace(line1)
+        fig.add_trace(line2)
+        fig.add_trace(point)
+        fig.write_html("templates/graph.html")
+        fig.write_html()
+        graph=plotly.offline.plot(fig,filename="simple-2d-line",output_type="div")
+
+
+    if len(x)==1:
 
         
-    #     y=np.arange(x[0]-5,x[0]+5)
-    #     x=np.ones(len(y))*x[0]
+        y=np.arange(x[0]-5,x[0]+5)
+        x=np.ones(len(y))*x[0]
+
+        plt.plot(x,y)
+        plt.legend(final_equations)
+        #plt.show()
 
 
-        
-
-    #     plt.plot(x,y)
-    #     plt.legend(final_equations)
-    #     plt.show()
-
-
-    return final_result
+    return final_result,graph
