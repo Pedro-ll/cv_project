@@ -36,7 +36,7 @@ def iris_pred():
 
         final_result,graph=run_main(img)
         
-        return render_template('main.html', pred = final_result)
+        return render_template('main.html',pred=final_result)
 
     else:
         return render_template('main.html')

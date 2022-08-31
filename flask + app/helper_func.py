@@ -173,7 +173,7 @@ def run_main(img):
     segments=new_segments
 
 
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/Users/pedroleal/Desktop/Ironhack/Final project/Project/Cloudvision/HandwritingRecognition_GoogleCloudVision/my-key.json"
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "my-key.json"
     print('Credendtials from environ: {}'.format(os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')))
 
     def CloudVisionTextExtractor(handwritings):
@@ -371,7 +371,6 @@ def run_main(img):
         fig.add_trace(line2)
         fig.add_trace(point)
         fig.write_html("templates/graph.html")
-        fig.write_html()
         graph=plotly.offline.plot(fig,filename="simple-2d-line",output_type="div")
 
 
