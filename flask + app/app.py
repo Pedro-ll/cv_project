@@ -43,7 +43,7 @@ def math_buddy():
 
 @app.route("/test")
 def test():
-    return render_template('real_graph.html')
+    return render_template('real_graph.html',pred=final_result)
 
 if __name__ == "__main__":
     app.run(debug = True, port = 8734)

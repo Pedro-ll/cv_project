@@ -267,6 +267,8 @@ def run_main(img):
             a=" ".join(a)
             coefs[i]=re.findall(r'\d+', a)
 
+    print(coefs)
+    print(numbers)
 
     if len(coefs)>len(numbers):
         sys.exit("System underdeterminated. You have more unknowns than equations. You must have the same number.")
@@ -358,7 +360,7 @@ def run_main(img):
         xx1=np.arange(x[0]-a,x[0]+a)
         yy1=(numbers[0]-coefs[0][0]*xx1)/coefs[0][1]
 
-        xx2=np.arange(x[1]-a,x[1]+a)
+        xx2=np.arange(x[0]-a,x[0]+a)
         yy2=(numbers[1]-coefs[1][0]*xx2)/coefs[1][1]
 
         fig = go.Figure()

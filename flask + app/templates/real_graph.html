@@ -19,6 +19,10 @@
 
     <h1>Solved Equation Graphs</h1>
 
+    {% if pred %}
+            <h2>{{pred}}</h2>
+        {% endif %}
+
     {% include 'graph.html' %}
 
     <p></p>

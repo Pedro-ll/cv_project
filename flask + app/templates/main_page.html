@@ -33,11 +33,6 @@
 
     
     <div class = 'content'>
-        {% if pred %}
-            <h3>The result of your prediction is</h3>
-            <h1>{{pred}}</h1>
-        {% endif %}
-
         <p></p>
 
         <button type="button" onclick="window.location.href='{{ url_for( 'test' ) }}';">Check the Graph</button>
