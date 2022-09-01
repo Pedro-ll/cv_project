@@ -15,7 +15,7 @@ final_result = ''
 graph=""
 
 @app.route('/',methods = ['POST','GET'])
-def iris_pred():
+def math_buddy():
     global final_result
     global graph
 
@@ -43,7 +43,7 @@ def iris_pred():
 
 @app.route("/test")
 def test():
-    return render_template('graph.html')
+    return render_template('real_graph.html')
 
 if __name__ == "__main__":
     app.run(debug = True, port = 8734)

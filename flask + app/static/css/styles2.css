@@ -8,18 +8,8 @@ h1 {
 }
 
 h3 {
-    color: rgb(80, 80, 80);
-    font-style: italic;
-}
-
-h2 {
     text-align: center;
-}
-
-
-body {
-    background-color: rgb(69, 149, 183);
-
+    color: azure; 
 }
 
 .content {

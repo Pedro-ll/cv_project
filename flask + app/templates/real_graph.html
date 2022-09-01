@@ -2,30 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Plotly and fun </title>
-    <script src="csi.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grahp</title>
+    <link rel = "stylesheet" href = "../static/css/styles2.css"
 </head>
-
-<h1>Title and some content above plotly graph</h1>
-
-<p>Other stuff below the plot</p>
-
 <body>
-    <div data-include="graph.html"></div>
-    <h1>Hello, world!</h1>
-    </body>
 
+    <style>
+        body
+        {
+          background-image: url({{ url_for("static", filename='images/second.jpg') }})
+        }
+    </style>
+
+
+    <h1>Solved Equation Graphs</h1>
+
+    {% include 'graph.html' %}
+
+    <p></p>
+
+    <button type="button" onclick="window.location.href='{{ url_for( 'math_buddy' ) }}';">Go back to Math Buddy</button>
+
+</body>
 </html>
-
-
-
-    <script type="text/javascript">
-
-        $(function () {
-
-            $(".Div1").load("graph.html");
-
-
-        });
-
-    </script>
